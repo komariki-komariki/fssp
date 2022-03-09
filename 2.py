@@ -44,7 +44,6 @@ def check_status(task): # Проверка статуса
 
 def group_all_region(): # Групповой запрос
     data_list = all_region()
-    task_list = []
     a = data_list[:49]
     b = data_list[49:]
     headers = {'accept': 'application/json', 'Content-Type': 'application/json'}
@@ -53,10 +52,13 @@ def group_all_region(): # Групповой запрос
     response = requests.post('https://api-ip.fssp.gov.ru/api/v1.0/search/group', headers=headers, data=data)
     time.sleep(5)
     response_1 = requests.post('https://api-ip.fssp.gov.ru/api/v1.0/search/group', headers=headers, data=data_1)
+    #прежде чем добавлять в словарь надо посмотреть что он возвращает.
+    #print(response)
+    #print(response_1)
+    #task = response['response']['task']
+    #task_1 = response_1['response']['task']
     task_list.append(response)
     task_list.append(response_1)
-    return task_list
-
 
 def all_region(): # Создание списка для группового запроса
     group_list = []
@@ -70,7 +72,7 @@ def all_region(): # Создание списка для группового з
     return group_list
 
 
-# group_all_region()
+group_all_region()
 # print(all_region())
 
 
@@ -79,7 +81,7 @@ def all_region(): # Создание списка для группового з
 # fisical()
 # print(check_status("bab6863a-6974-4f86-b019-0e51fc79b7ae"))
 # #result(fisical())
-# print(task_list)
+print(task_list)
 # time.sleep(5)
 # print(status(a))
 # group()
